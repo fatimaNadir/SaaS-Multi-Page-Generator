@@ -1,121 +1,120 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaaS Multi-Page Generator Pro</title>
+    <title>SiteCraft Pro - Advanced SaaS Multi-Page Generator</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- JSZip for One-Click ZIP Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 flex flex-col min-h-screen">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
 
-    <!-- Header -->
-    <header class="w-full bg-slate-950 border-b border-slate-800 py-4 px-6 flex justify-between items-center shadow-lg">
-        <h1 class="text-xl font-bold tracking-wide text-indigo-400">SaaS Multi-Page Generator</h1>
-        <span class="text-xs bg-indigo-900 text-indigo-200 px-3 py-1 rounded-full border border-indigo-700 font-medium">Pro Engine v1.1</span>
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-black bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">SiteCraft Pro 🚀</span>
+                <span class="text-xs px-2.5 py-1 bg-indigo-500/20 text-indigo-400 rounded-full font-semibold border border-indigo-500/30">Pro SaaS v2.0</span>
+            </div>
+            <div class="text-sm text-slate-400">Cloud Connected (Supabase)</div>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
-        <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-md">
-            
-            <div class="text-center mb-8">
-                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-2">Create Your Professional Multi-Page Website</h2>
-                <p class="text-slate-400 text-sm">Fill in your business details below to generate a complete multi-page responsive website instantly.</p>
-            </div>
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Form Section -->
+        <div class="lg:col-span-1 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <h2 class="text-xl font-bold mb-1 text-white">Configure Your SaaS Site</h2>
+            <p class="text-xs text-slate-400 mb-6">Fill in details to generate professional layouts instantly.</p>
 
-            <!-- Generator Form -->
-            <form id="generatorForm" class="space-y-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Business Name</label>
-                        <input type="text" id="businessName" required placeholder="e.g. Aroma Crust Cafe" 
-                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">City / Location</label>
-                        <input type="text" id="city" required placeholder="e.g. Karachi Malir" 
-                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Phone Number</label>
-                        <input type="text" id="phone" required placeholder="e.g. 03242546651" 
-                            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Theme Color</label>
-                        <select id="themeColor" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
-                            <option value="emerald">Emerald Green</option>
-                            <option value="indigo">Indigo Blue</option>
-                            <option value="rose">Rose Red</option>
-                            <option value="amber">Amber Gold</option>
-                        </select>
-                    </div>
+            <form id="generator-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Business Name</label>
+                    <input type="text" id="business-name" required placeholder="e.g. Nexus Tech" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500 text-white">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Services / Description</label>
-                    <textarea id="services" rows="3" required placeholder="Describe your services or business specialties..." 
-                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"></textarea>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">City / Location</label>
+                    <input type="text" id="business-city" required placeholder="e.g. Karachi, Pakistan" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500 text-white">
                 </div>
 
-                <!-- Submit Button with Spinner -->
-                <button type="submit" id="submitBtn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3.5 px-6 rounded-lg shadow-lg transition flex items-center justify-center space-x-2">
-                    <span id="btnText">Generate Multi-Page Website 🚀</span>
-                    <svg id="loadingSpinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Phone Number</label>
+                    <input type="text" id="business-phone" required placeholder="e.g. +92 300 1234567" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Select Design Template</label>
+                    <select id="template-style" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500 text-white">
+                        <option value="modern-dark">Modern Dark Startup</option>
+                        <option value="minimalist">Minimalist Corporate</option>
+                        <option value="ecommerce">E-Commerce & Retail</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Services / Description</label>
+                    <textarea id="business-services" rows="3" required placeholder="Describe what your business offers..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500 text-white"></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-3 rounded-lg text-sm transition shadow-lg shadow-indigo-600/20 flex items-center justify-center space-x-2">
+                    <span id="btn-text">Generate & Save Site 🚀</span>
+                    <svg id="loading-spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                     </svg>
                 </button>
             </form>
-
-            <!-- Success Status & Action Links -->
-            <div id="statusMessage" class="mt-6 text-center hidden">
-                <p class="text-emerald-400 font-medium mb-3">🎉 Website Generated & Saved Successfully!</p>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <button id="previewBtn" class="bg-slate-700 hover:bg-slate-600 text-xs font-semibold py-2 px-4 rounded-md transition text-white">Preview Details</button>
-                    <button id="copyInfoBtn" class="bg-slate-700 hover:bg-slate-600 text-xs font-semibold py-2 px-4 rounded-md transition text-white">Copy Summary</button>
-                </div>
-            </div>
         </div>
 
-        <!-- Recent History Section -->
-        <div class="mt-10 bg-slate-800/40 border border-slate-700/40 rounded-2xl p-6">
-            <h3 class="text-lg font-bold text-white mb-4 flex items-center justify-between">
-                <span>Recent Generated Websites</span>
-                <button id="refreshHistory" class="text-xs text-indigo-400 hover:underline">Refresh List</button>
-            </h3>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="bg-slate-900/60 text-xs uppercase text-slate-400 border-b border-slate-700">
-                        <tr>
-                            <th class="p-3">Business Name</th>
-                            <th class="p-3">City</th>
-                            <th class="p-3">Phone</th>
-                            <th class="p-3">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historyTableBody">
-                        <tr>
-                            <td colspan="4" class="p-4 text-center text-slate-500">Loading history...</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Preview & Export Section -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-white">Live Template Preview</h3>
+                    <div class="flex space-x-2">
+                        <button id="download-zip-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3 py-2 rounded-lg font-medium transition flex items-center space-x-1">
+                            <span>📥 Download ZIP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Window -->
+                <div id="preview-container" class="bg-slate-950 border border-slate-800 rounded-xl p-6 min-h-[350px] flex flex-col justify-between">
+                    <div class="text-center my-auto text-slate-500">
+                        <p class="text-sm">Fill out the form on the left to see your generated live website structure here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-bold mb-4 text-white">Cloud History (Supabase)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-400">
+                        <thead class="bg-slate-950 text-xs uppercase text-slate-500 border-b border-slate-800">
+                            <tr>
+                                <th class="px-4 py-3">Business Name</th>
+                                <th class="px-4 py-3">Template</th>
+                                <th class="px-4 py-3">Location</th>
+                                <th class="px-4 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body" class="divide-y divide-slate-800">
+                            <!-- Dynamic rows will load here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full bg-slate-950 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
-        &copy; 2026 SaaS Multi-Page Generator. All rights reserved.
-    </footer>
-
-    <!-- Main Script Link -->
+    <!-- Main Logic Script -->
     <script src="generator.js"></script>
 </body>
 </html>
